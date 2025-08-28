@@ -1,0 +1,40 @@
+import os
+import argparse
+
+parser = argparse.ArgumentParser(
+    prog = 'clear_my_answers.py',
+    description = 'clears my answers from video sets',
+    epilog = 'do that'
+)
+
+parser.add_argument('dirname')
+args = parser.parse_args()
+
+
+dir = args.dirname
+nums = os.listdir(dir)
+
+for num in nums[:10]:
+    answers_path = f"./{dir}/{num}/{num}_answers.json"
+    answers_reformatted_path = f"./{dir}/{num}/{num}_answers_reformatted.json"
+    critic_path = f"./{dir}/{num}/{num}_critic_assessment.json"
+    re_eval_path = f"./{dir}/{num}/{num}_re_evaluated.json"
+    
+    if os.path.exists(answers_path):
+        os.remove(answers_path)
+        print(f"Deleted: {answers_path}")
+        pass
+    
+    if os.path.exists(answers_reformatted_path):
+        os.remove(answers_reformatted_path)
+        print(f"Deleted: {answers_reformatted_path}")
+        pass
+
+    if os.path.exists(critic_path):
+        os.remove(critic_path)
+        print(f"Deleted: {critic_path}")
+
+    if os.path.exists(re_eval_path):
+        os.remove(re_eval_path)
+        print(f"Deleted: {re_eval_path}")
+
