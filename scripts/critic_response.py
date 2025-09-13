@@ -433,7 +433,7 @@ async def query_model_iterative(model, question, question_uid, vid_path):
 async def re_evaluate_low_confidence_answers(
     vid_dir,
     num,
-    confidence_threshold=50,
+    confidence_threshold=70,
     llm_model="openai/gpt-oss-120b",
     vlm_model="meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8"
 ):
@@ -572,7 +572,7 @@ async def re_evaluate_low_confidence_answers(
 
 async def all_vids(vid_folder, batch_size = 1):
     curr_folder = vid_folder
-    curr_paths = os.listdir(curr_folder)[:10]
+    curr_paths = os.listdir(curr_folder)
     print(curr_paths)
     print(curr_paths)
     all_tasks = []
@@ -635,6 +635,12 @@ async def total_main(vid_dir):
 
 if __name__ == "__main__":
     import asyncio
+    import argparse
+    
+    parser = argparse.ArgumentParser()
+    parser.add_argument("vid_dir", type=str, default="videos")
+    args = parser.parse_args()
+    vid_dir = args.vid_dir
     
     open('embed_queries.json', 'w').close()
     open('ret_embeddings.json', 'w').close()

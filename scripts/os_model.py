@@ -77,7 +77,7 @@ class Pipeline:
         return result
         
 
-my_model = Pipeline("deepseek-ai/DeepSeek-V3.1", "Qwen/Qwen2.5-VL-72B-Instruct")
+my_model = Pipeline("deepseek-ai/DeepSeek-V3.1", "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8")
 
 async def query_model_iterative_with_retry(model, question, uid, vid_path, output_file, max_retries=15):
     """Wrapper to retry query_model_iterative if it hangs"""
@@ -290,6 +290,11 @@ async def query_model_iterative(model, question, question_uid, vid_path):
                     "reasoning": parsed_response.get("reasoning"), 
                     "evidence_frame_numbers": parsed_response.get("frames")  # Map "frames" to "evidence_frame_numbers"
                 }
+                with open(f"{vid_path}/{question_uid}_os_model.json", "w") as f:
+                    json.dump(model.messages, f, indent=2)
+                    with open(f"answers_logs.json", "a") as f:
+                        f.write(f"saved model messages for question {question_uid}, video {vid_path}\n")
+
                 return new_response
             elif parsed_response.get("tool") == "VLM_QUERY":
                 print("parsed response: ", parsed_response)
@@ -416,7 +421,7 @@ async def one_vid(vid_folder, vid_num):
     answers_path = f'{curr_folder}/{num}/{num}_answers.json'
     batch_size = 20
     with open(questions_path, "r") as f:
-        questions = json.load(f)[0:20]
+        questions = json.load(f)[0:1]
 
 
     # Process questions in batches
@@ -491,17 +496,17 @@ async def all_vids(vid_folder, batch_size = 1):
     print("all vids failed tasks:", failed_tasks)
     return failed_tasks
 
-async def all_vids_main():
-    await all_vids('./videos_two')
+async def all_vids_main(vid_dir):
+    await all_vids(vid_dir)
 
-async def total_main():
+async def total_main(vid_dir):
     # Start the background embedding task
     embed_task = asyncio.create_task(batch_embed_query_async('embed_queries.json', 'ret_embeddings.json', 'openai'))
 
     
     # Run the main video processing
     try:
-        await all_vids_main()
+        await all_vids_main(vid_dir)
     finally:
         # Cancel the embedding task when done
         embed_task.cancel()
@@ -512,6 +517,13 @@ async def total_main():
 
 if __name__ == "__main__":
     import asyncio
+    import argparse
+    
+    parser = argparse.ArgumentParser()
+    parser.add_argument("vid_dir", type=str, default="videos")
+    args = parser.parse_args()
+    vid_dir = args.vid_dir
+    
     open('embed_queries.json', 'w').close()
     open('ret_embeddings.json', 'w').close()
     with open('embed_queries.json', 'w') as f:
@@ -522,6 +534,6 @@ if __name__ == "__main__":
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
     try:
-        loop.run_until_complete(total_main())
+        loop.run_until_complete(total_main(vid_dir))
     finally:
         loop.close()
