@@ -511,11 +511,25 @@ async def re_evaluate_low_confidence_answers(
                     result["uid"] = assessment.get("uid")
                     result["original_answer"] = assessment.get("answer")
                     result["original_confidence"] = assessment.get("confidence")
+                    # Log per-question
+                    try:
+                        with open("answers_logs.json", "a") as log_f:
+                            log_f.write(f"critic response re-evaluated uid {assessment.get('uid')} video {num}\n")
+                    except Exception:
+                        pass
                     result["critic_concerns"] = assessment.get("possible_errors", [])
                     result["critic_suggestion"] = assessment.get("suggestion")
                     result["critic_evidence"] = assessment.get("evidence_frame_numbers", [])
                     result["re_evaluated"] = True
                     
+                    # Save critic-response conversation
+                    try:
+                        conv_path = f"./{vid_dir}/{num}/{assessment.get('uid')}_critic_response.json"
+                        with open(conv_path, "w") as conv_f:
+                            json.dump(model.messages, conv_f, indent=2)
+                    except Exception:
+                        pass
+
                     return result
                 except Exception as e:
                     print(f"ERROR in solve_question for uid {assessment.get('uid')}: {e}")
@@ -561,6 +575,9 @@ async def re_evaluate_low_confidence_answers(
     with open(output_file, 'w') as f:
         json.dump(final_results, f, indent=2)
     
+    with open("answers_logs.json", "a") as f:
+        f.write(f"saved critic response final results to {output_file}\n")
+
     print(f"\n{'='*80}")
     print(f"Re-evaluation complete!")
     print(f"Total questions: {len(critic_assessments)}")

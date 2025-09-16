@@ -269,6 +269,20 @@ async def batch_critic_assess(answers_data, global_summary, vid_dir, num, llm_mo
                     num,
                     global_summary
                 )
+                # Log per-question assessment completion
+                try:
+                    with open("answers_logs.json", "a") as log_f:
+                        log_f.write(f"critic assessment completed for uid {data.get('uid')} video {num} in {vid_dir}\n")
+                except Exception:
+                    pass
+                
+                # Save full critic conversation
+                try:
+                    conv_path = f"./{vid_dir}/{num}/{data.get('uid')}_critic_model.json"
+                    with open(conv_path, "w") as conv_f:
+                        json.dump(critic.messages, conv_f, indent=2)
+                except Exception:
+                    pass
                 
                 return result
                 
@@ -379,6 +393,11 @@ async def assess_all(video_dir, num,
         output_path = f"./{video_dir}/{num}/{num}_critic_assessment.json"
         with open(output_path, "w") as f:
             json.dump(assessments, f, indent = 2)
+        
+
+
+        with open("answers_logs.json", "a") as f:
+            f.write(f"saved critic assessments for video {num} in {video_dir}\n")
         
         return assessments
     else:

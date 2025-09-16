@@ -322,9 +322,11 @@ async def query_model_iterative(model, question, question_uid, vid_path):
                 if isinstance(retrieved_info, list):
                     retrieved_info = json.dumps(retrieved_info, indent=2)
                 model.messages.append({"role": "caption search results", "content": retrieved_info})
+
             else:
                 print(f"Invalid or unrecognized tool: {parsed_response.get('tool')}")
                 continue
+
             # Update prompt for next iteration
             if parsed_response.get("tool") == "CAPTION_SEARCH":
                 prompt = "The following is the retrieved information from the caption search: Please read through and choose the most relevant few keyframes." + "\n"
@@ -370,7 +372,10 @@ async def query_model_iterative(model, question, question_uid, vid_path):
                     "reasoning": "Final iteration response",
                     "evidence_frame_numbers": []
                 }
-            
+            with open(f"{vid_path}/{question_uid}_os_model.json", "w") as f:
+                    json.dump(model.messages, f, indent=2)
+                    with open(f"answers_logs.json", "a") as f:
+                        f.write(f"saved model messages for question {question_uid}, video {vid_path}\n")
             return {
                 "uid": question_uid,
                 "question": question,
@@ -421,7 +426,7 @@ async def one_vid(vid_folder, vid_num):
     answers_path = f'{curr_folder}/{num}/{num}_answers.json'
     batch_size = 20
     with open(questions_path, "r") as f:
-        questions = json.load(f)[0:1]
+        questions = json.load(f)
 
 
     # Process questions in batches

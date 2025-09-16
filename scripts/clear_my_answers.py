@@ -1,4 +1,4 @@
-qimport os
+import os
 import argparse
 
 parser = argparse.ArgumentParser(
@@ -16,6 +16,7 @@ dir = args.dirname
 nums = os.listdir(dir)
 
 for num in nums[:10]:
+    print(num)
     answers_path = f"./{dir}/{num}/{num}_answers.json"
     answers_reformatted_path = f"./{dir}/{num}/{num}_answers_reformatted.json"
     critic_path = f"./{dir}/{num}/{num}_critic_assessment.json"
@@ -23,8 +24,9 @@ for num in nums[:10]:
     
     
     if os.path.exists(f"./{dir}/{num}/{num}_{args.file_type}.json"):
-        os.remove(f"./{dir}/{num}/{num}_{args.file_type}.json")
-        print(f"Deleted: ./{dir}/{num}/{num}_{args.file_type}.json")
+        #os.remove(f"./{dir}/{num}/{num}_{args.file_type}.json")
+        #print(f"Deleted: ./{dir}/{num}/{num}_{args.file_type}.json")
+        pass
         
     """
     if os.path.exists(answers_path):
