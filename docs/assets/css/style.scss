@@ -3,191 +3,440 @@
 
 @import "minima";
 
-// Custom styles for the research blog
+// Modern Research Blog Styles
 
-// Typography improvements
+// Color Palette
+$primary-color: #1e88e5;
+$secondary-color: #00acc1;
+$accent-color: #ff6f00;
+$text-dark: #212121;
+$text-light: #757575;
+$bg-light: #fafafa;
+$card-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+// Typography
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   line-height: 1.7;
-  color: #333;
+  color: $text-dark;
+  background-color: $bg-light;
 }
 
 // Header styling
 .site-header {
-  border-top: 5px solid #424242;
-  border-bottom: 1px solid #e8e8e8;
-  min-height: 56px;
-  background-color: #fff;
+  background: linear-gradient(135deg, $primary-color, $secondary-color);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border: none;
+  min-height: 70px;
+
+  .wrapper {
+    padding: 1rem 0;
+  }
 }
 
 .site-title {
-  font-size: 26px;
-  font-weight: 600;
-  letter-spacing: -1px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
   margin-bottom: 0;
-}
+  color: white !important;
+  text-decoration: none;
 
-// Post content
-.post-content {
-  h2 {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    color: #2a2a2a;
-    border-bottom: 2px solid #e8e8e8;
-    padding-bottom: 0.3rem;
-  }
-
-  h3 {
-    margin-top: 1.5rem;
-    margin-bottom: 0.8rem;
-    color: #424242;
-  }
-
-  h4 {
-    margin-top: 1.2rem;
-    margin-bottom: 0.6rem;
-    color: #606060;
-  }
-
-  // Blockquotes for examples
-  blockquote {
-    border-left: 4px solid #00796b;
-    padding-left: 1rem;
-    margin: 1.5rem 0;
-    background-color: #f5f5f5;
-    font-style: normal;
-
-    p {
-      margin-bottom: 0.5rem;
-    }
-  }
-
-  // Tables
-  table {
-    width: 100%;
-    margin: 1.5rem 0;
-    border-collapse: collapse;
-
-    th {
-      background-color: #424242;
-      color: white;
-      padding: 10px;
-      text-align: left;
-    }
-
-    td {
-      padding: 10px;
-      border-bottom: 1px solid #e8e8e8;
-    }
-
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
-    }
-  }
-
-  // Code blocks
-  pre {
-    background-color: #f4f4f4;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    padding: 1rem;
-    overflow-x: auto;
-  }
-
-  code {
-    background-color: #f4f4f4;
-    padding: 2px 4px;
-    border-radius: 3px;
-    font-size: 0.9em;
-  }
-
-  // Lists
-  ul, ol {
-    margin-left: 1.5rem;
-    margin-bottom: 1rem;
-
-    li {
-      margin-bottom: 0.3rem;
-    }
-  }
-
-  // Strong emphasis for key results
-  strong {
-    color: #00796b;
-    font-weight: 600;
+  &:hover {
+    text-decoration: none;
+    opacity: 0.9;
   }
 }
 
-// Home page
+.site-nav {
+  .page-link {
+    color: white;
+    margin-left: 20px;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Home page intro
 .home {
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: #2a2a2a;
+  .intro-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 3rem;
+    box-shadow: $card-shadow;
+
+    .lead {
+      font-size: 1.2rem;
+      color: $text-light;
+      margin-bottom: 2rem;
+    }
+
+    .key-stats {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+
+      .stat {
+        text-align: center;
+        flex: 1;
+        min-width: 150px;
+        padding: 1rem;
+
+        .stat-number {
+          display: block;
+          font-size: 2.5rem;
+          font-weight: 700;
+          color: $primary-color;
+          margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+          display: block;
+          font-size: 0.9rem;
+          color: $text-light;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+      }
+    }
   }
 
-  h2 {
+  h1.page-heading {
+    color: $text-dark;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+  }
+
+  h2.post-list-heading {
+    color: $text-dark;
+    margin-bottom: 1.5rem;
     font-size: 1.8rem;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    color: #424242;
+    border-bottom: 3px solid $primary-color;
+    padding-bottom: 0.5rem;
   }
 }
 
-// Post list
+// Post list styling
 .post-list {
   margin-left: 0;
   list-style: none;
 
   > li {
+    background: white;
+    padding: 2rem;
     margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #e8e8e8;
+    border-radius: 8px;
+    box-shadow: $card-shadow;
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .post-meta {
+      font-size: 0.9rem;
+      color: $text-light;
+      font-weight: 500;
+    }
+
+    h3 {
+      margin: 0.5rem 0 1rem;
+
+      .post-link {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: $text-dark;
+        text-decoration: none;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+
+    .post-excerpt {
+      color: $text-light;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+
+      .read-more {
+        color: $primary-color;
+        font-weight: 500;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .post-categories {
+      .category-tag {
+        display: inline-block;
+        background: linear-gradient(135deg, $primary-color, $secondary-color);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        margin-right: 0.5rem;
+        font-weight: 500;
+      }
+    }
   }
 }
 
-.post-meta {
-  font-size: 14px;
-  color: #828282;
-}
+// Post content styling
+.post-content {
+  max-width: 800px;
+  margin: 0 auto;
 
-.post-link {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #2a2a2a;
-  text-decoration: none;
+  h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: $text-dark;
+    border-bottom: 3px solid $primary-color;
+    padding-bottom: 0.5rem;
+    font-size: 1.8rem;
+  }
 
-  &:hover {
-    color: #00796b;
-    text-decoration: underline;
+  h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: $text-dark;
+    font-size: 1.4rem;
+  }
+
+  h4 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+    color: $text-dark;
+    font-size: 1.2rem;
+  }
+
+  blockquote {
+    border-left: 4px solid $primary-color;
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    background-color: rgba($primary-color, 0.05);
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+
+    p {
+      margin-bottom: 0.5rem;
+      color: $text-dark;
+    }
+  }
+
+  table {
+    width: 100%;
+    margin: 2rem 0;
+    border-collapse: collapse;
+    box-shadow: $card-shadow;
+    border-radius: 8px;
+    overflow: hidden;
+
+    th {
+      background: linear-gradient(135deg, $primary-color, $secondary-color);
+      color: white;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    tr:nth-child(even) {
+      background-color: $bg-light;
+    }
+
+    tr:hover {
+      background-color: rgba($primary-color, 0.05);
+    }
+  }
+
+  pre {
+    background-color: #2d2d2d;
+    color: #f8f8f2;
+    border-radius: 6px;
+    padding: 1.5rem;
+    overflow-x: auto;
+    box-shadow: $card-shadow;
+  }
+
+  code {
+    background-color: rgba($primary-color, 0.1);
+    color: $primary-color;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.9em;
+    font-family: 'Consolas', 'Monaco', monospace;
+  }
+
+  pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+  }
+
+  ul, ol {
+    margin-left: 2rem;
+    margin-bottom: 1.5rem;
+
+    li {
+      margin-bottom: 0.5rem;
+      line-height: 1.8;
+    }
+  }
+
+  strong {
+    color: $accent-color;
+    font-weight: 600;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: $card-shadow;
+    margin: 2rem 0;
   }
 }
 
 // Footer
 .site-footer {
-  border-top: 1px solid #e8e8e8;
-  padding: 30px 0;
-  background-color: #f9f9f9;
+  background: linear-gradient(135deg, $primary-color, $secondary-color);
+  color: white;
+  padding: 40px 0;
+  margin-top: 3rem;
+
+  .footer-col-wrapper {
+    color: white;
+  }
+
+  .footer-col {
+    color: white;
+  }
+
+  a {
+    color: white;
+    text-decoration: underline;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+// RSS Subscribe
+.rss-subscribe {
+  margin-top: 2rem;
+  text-align: center;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, $primary-color, $secondary-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    .svg-icon {
+      width: 16px;
+      height: 16px;
+      fill: white;
+    }
+  }
 }
 
 // Responsive design
+@media screen and (max-width: 800px) {
+  .home {
+    .intro-section {
+      padding: 1.5rem;
+
+      .key-stats {
+        flex-direction: column;
+
+        .stat {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+
+  .post-list > li {
+    padding: 1.5rem;
+  }
+
+  .site-header {
+    .site-title {
+      font-size: 24px;
+    }
+  }
+
+  .post-content {
+    h1 {
+      font-size: 2rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+    }
+  }
+}
+
 @media screen and (max-width: 600px) {
   .site-nav {
     position: absolute;
-    top: 9px;
+    top: 15px;
     right: 15px;
-    background-color: #fdfdfd;
+    background-color: white;
     border: 1px solid #e8e8e8;
     border-radius: 5px;
     text-align: right;
+    box-shadow: $card-shadow;
+
+    .page-link {
+      color: $text-dark !important;
+    }
   }
 
-  .post-content h1 {
-    font-size: 2rem;
+  .home {
+    h1.page-heading {
+      font-size: 2rem;
+    }
+
+    h2.post-list-heading {
+      font-size: 1.5rem;
+    }
   }
 
-  .post-content h2 {
-    font-size: 1.5rem;
+  .post-list > li {
+    padding: 1rem;
+
+    h3 .post-link {
+      font-size: 1.2rem;
+    }
   }
 }

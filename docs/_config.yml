@@ -9,19 +9,25 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site
 
 # Build settings
-theme: minima
+remote_theme: jekyll/minima
+minima:
+  skin: dark
+  date_format: "%B %-d, %Y"
+
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-remote-theme
 
 # Permalink structure
-permalink: /:year/:month/:day/:title/
+permalink: /blog/:year/:month/:day/:title/
 
-# Collections
-collections:
-  posts:
-    output: true
-    permalink: /posts/:year/:month/:day/:title/
+# Show excerpts on home page
+show_excerpts: true
+
+# Pagination
+paginate: 10
+paginate_path: "/page:num/"
 
 # Defaults
 defaults:
