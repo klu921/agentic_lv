@@ -1,0 +1,193 @@
+---
+---
+
+@import "minima";
+
+// Custom styles for the research blog
+
+// Typography improvements
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.7;
+  color: #333;
+}
+
+// Header styling
+.site-header {
+  border-top: 5px solid #424242;
+  border-bottom: 1px solid #e8e8e8;
+  min-height: 56px;
+  background-color: #fff;
+}
+
+.site-title {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  margin-bottom: 0;
+}
+
+// Post content
+.post-content {
+  h2 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #2a2a2a;
+    border-bottom: 2px solid #e8e8e8;
+    padding-bottom: 0.3rem;
+  }
+
+  h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+    color: #424242;
+  }
+
+  h4 {
+    margin-top: 1.2rem;
+    margin-bottom: 0.6rem;
+    color: #606060;
+  }
+
+  // Blockquotes for examples
+  blockquote {
+    border-left: 4px solid #00796b;
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    background-color: #f5f5f5;
+    font-style: normal;
+
+    p {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  // Tables
+  table {
+    width: 100%;
+    margin: 1.5rem 0;
+    border-collapse: collapse;
+
+    th {
+      background-color: #424242;
+      color: white;
+      padding: 10px;
+      text-align: left;
+    }
+
+    td {
+      padding: 10px;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+  }
+
+  // Code blocks
+  pre {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 1rem;
+    overflow-x: auto;
+  }
+
+  code {
+    background-color: #f4f4f4;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
+
+  // Lists
+  ul, ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+
+    li {
+      margin-bottom: 0.3rem;
+    }
+  }
+
+  // Strong emphasis for key results
+  strong {
+    color: #00796b;
+    font-weight: 600;
+  }
+}
+
+// Home page
+.home {
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #2a2a2a;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #424242;
+  }
+}
+
+// Post list
+.post-list {
+  margin-left: 0;
+  list-style: none;
+
+  > li {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e8e8e8;
+  }
+}
+
+.post-meta {
+  font-size: 14px;
+  color: #828282;
+}
+
+.post-link {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2a2a2a;
+  text-decoration: none;
+
+  &:hover {
+    color: #00796b;
+    text-decoration: underline;
+  }
+}
+
+// Footer
+.site-footer {
+  border-top: 1px solid #e8e8e8;
+  padding: 30px 0;
+  background-color: #f9f9f9;
+}
+
+// Responsive design
+@media screen and (max-width: 600px) {
+  .site-nav {
+    position: absolute;
+    top: 9px;
+    right: 15px;
+    background-color: #fdfdfd;
+    border: 1px solid #e8e8e8;
+    border-radius: 5px;
+    text-align: right;
+  }
+
+  .post-content h1 {
+    font-size: 2rem;
+  }
+
+  .post-content h2 {
+    font-size: 1.5rem;
+  }
+}
