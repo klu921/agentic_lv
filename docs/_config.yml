@@ -1,0 +1,39 @@
+title: Long-Context Video Understanding Research
+author: Research Team
+email: email@domain.com
+description: >-
+  Research blog on long-context video understanding using LLMs and VLMs.
+  Exploring agentic pipelines and critic modules for improved accuracy.
+
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site
+
+# Build settings
+remote_theme: jekyll/minima
+minima:
+  skin: dark
+  date_format: "%B %-d, %Y"
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-remote-theme
+
+# Permalink structure
+permalink: /blog/:year/:month/:day/:title/
+
+# Show excerpts on home page
+show_excerpts: true
+
+# Pagination
+paginate: 10
+paginate_path: "/page:num/"
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Research Team"
